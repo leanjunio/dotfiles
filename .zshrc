@@ -156,6 +156,10 @@ function gnt {
   git worktree add ../${1} -b ${2}
 }
 
+function gclean {
+  git branch --merged main | grep -v '^[ *]*main$' | xargs git branch -d
+}
+
 function gwt {
   git worktree add ../${1} ${2}
 }
