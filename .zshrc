@@ -126,7 +126,20 @@ alias ddown="docker-compose -f docker-compose.dev.yml down"
 alias dbuild="docker-compose -f docker-compose.dev.yml build"
 alias dlogs="docker-compose logs --follow"
 alias lci="yarn run-ci-checks"
-alias dprune="docker system prune"
+
+function drun {
+  docker_file=$(find -maxdepth 1 -name "docker-compose*")
+  docker-compose -f ${docker_file} up --build
+}
+
+function dstop {
+  docker-compose stop
+}
+
+function dprune {
+  docker system prune
+  docker volume prune
+}
 
 # torc alias
 alias ctorc="cd /home/ljunio/Desktop/torc-interview"
@@ -150,6 +163,11 @@ function gwt {
   git worktree add ../${1} ${2}
 }
 
+function mep {
+  git config --local user.name "Lean Junio"
+  git config --local user.email "leanjunio@live.com"
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -162,6 +180,10 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # Git stuff
 function gpt {
   git remote set-url origin github.com-leanjunio:leanjunio/${1}.git
+}
+
+function gap {
+  git remote add origin git@github.com-leanjunio:leanjunio/${1}.git
 }
 
 function gcp {
@@ -186,3 +208,16 @@ function seedlocal {
     done
   fi
 }
+
+function work {
+  clab
+  tmux new-session -d -s "labnetic"
+  tmux send-keys -t labnetic.0 "dup" Enter
+  tmux split-window
+  tmux send-keys -t labnetic.1 "code ." Enter
+  tmux attach -t labnetic
+}
+
+alias cmine="cd ~/Documents/personal"
+
+alias kconfig="nvim ~/.config/kitty/kitty.conf"
