@@ -223,3 +223,4 @@ function work {
 alias cmine="cd ~/Documents/personal"
 
 alias kconfig="nvim ~/.config/kitty/kitty.conf"
+
