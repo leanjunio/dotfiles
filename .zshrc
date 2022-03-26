@@ -141,9 +141,6 @@ function dprune {
   docker volume prune
 }
 
-# torc alias
-alias ctorc="cd /home/ljunio/Desktop/torc-interview"
-
 # setups the SSL for local development
 function cert {
   mkcert -install
@@ -191,6 +188,7 @@ function gcp {
 }
 
 # Transfers the staging data into the mongo container dev is running in
+# TODO: update this to fetch from staging database
 function seedlocal {
   docker_id=$(docker ps | grep 'mongo' | cut -f 1 -d ' ')
 
